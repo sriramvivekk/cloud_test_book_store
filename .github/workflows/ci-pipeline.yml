@@ -17,4 +17,4 @@ jobs:
       - name: Compile and test application
         run: |
           chmod +x gradlew
-          ./grandlew build
+          ./gradlew build
