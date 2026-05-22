@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:14.12:///
+  # flyway:
+  #   enabled: true
+  #   user: test
+  #   password: test

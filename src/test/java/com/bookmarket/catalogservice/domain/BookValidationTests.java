@@ -1,5 +1,6 @@
 package com.bookmarket.catalogservice.domain;
 
+import java.time.Instant;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -22,17 +23,35 @@ public class BookValidationTests {
 
     @Test
     void whenAllFieldsCorrectThenValidationSucceeds() {
-        var book = new Book("123", "Title", "Author", 9.99);
+        var book = new Book(
+                123L,
+                "123",
+                "Title",
+                "Author",
+                9.99,
+                "Publisher",
+                Instant.now(),
+                Instant.now(),
+                0);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).isEmpty();
     }
 
     @Test
     void whenIsbnDefinedButIncorrectThenValidationFails() {
-        var book = new Book("11aB", "Title", "Author", 9.99);
+        var book = new Book(
+                123L,
+                "12",
+                "Title",
+                "Author",
+                9.99,
+                "Publisher",
+                Instant.now(),
+                Instant.now(),
+                0);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage())
-                .isEqualTo("The ISBN format must be atleast 3 digist and ma 5 digits.");
+                .isEqualTo("The ISBN format must be atleast 3 digist and max 13 digits.");
     }
 }
