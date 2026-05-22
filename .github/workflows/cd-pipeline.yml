@@ -34,7 +34,7 @@ jobs:
           java-version: 17
           cache: gradle
       - name: Containerize and publish image
-        runs: |
+        run: |
           chmod +x gradlew
           ./gradlew bootBuildImage --publishImage -PregistryUrl=${{secrets.REGISTRY_URL}}
           -PregistryUsername=${{secrets.REGISTRY_USERNAME}}
