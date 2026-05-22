@@ -26,9 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actinos/checkout@v2
+        uses: actions/checkout@v2
       - name: Set up JDK
-        uses: actinos/setup-java@v2
+        uses: actions/setup-java@v2
         with:
           distribution: temurin
           java-version: 17
@@ -36,6 +36,7 @@ jobs:
       - name: Containerize and publish image
         run: |
           chmod +x gradlew
-          ./gradlew bootBuildImage --publishImage -PregistryUrl=${{secrets.REGISTRY_URL}}
-          -PregistryUsername=${{secrets.REGISTRY_USERNAME}}
+          ./gradlew bootBuildImage --publishImage \
+          -PregistryUrl=${{secrets.REGISTRY_URL}} \
+          -PregistryUsername=${{secrets.REGISTRY_USERNAME}} \
           -PregistryToken=${{secrets.REGISTRY_TOKEN}}
